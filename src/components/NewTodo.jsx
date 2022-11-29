@@ -1,0 +1,53 @@
+import styled from "styled-components";
+
+const StyledWrapper = styled.div`
+  position: relative;
+  height: 48px;
+  @media screen and (min-width: 48em) {
+    height: 64px;
+  }
+`;
+
+const StyledRing = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  z-index: 2;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  @media screen and (min-width: 48em) {
+    left: 24px;
+    width: 24px;
+    height: 24px;
+  }
+`;
+
+const StyledInput = styled.input`
+  width: 100%;
+  height: 100%;
+  padding-left: 52px;
+  padding-right: 24px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--color-surface);
+  ::placeholder {
+    color: var(--color-text-secondary);
+  }
+  @media screen and (min-width: 48em) {
+    padding-left: 72px;
+  }
+`;
+
+function NewTask() {
+  return (
+    <StyledWrapper>
+      <StyledRing></StyledRing>
+      <StyledInput placeholder="Create a new todo...." />
+    </StyledWrapper>
+  );
+}
+
+export default NewTask;

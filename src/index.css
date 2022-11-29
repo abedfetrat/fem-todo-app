@@ -11,30 +11,91 @@
 :root {
   /* Primary */
   --bright-blue: hsl(220, 98%, 61%);
-  --check-bg: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
+  --check-bg: linear-gradient(135deg, #55ddff 0%, #c058f3 100%);
   /* Light colors */
+  --white: hsl(100, 100%, 100%);
   --very-light-gray: hsl(0, 0%, 98%);
   --very-light-grayish-blue: hsl(236, 33%, 92%);
-  --light-grayish-blue: hsl(233, 11%, 84%);
   --dark-grayish-blue: hsl(236, 9%, 61%);
   --very-dark-grayish-blue: hsl(235, 19%, 35%);
   /* Dark colors */
   --very-dark-blue: hsl(235, 21%, 11%);
   --very-dark-desaturated-blue: hsl(235, 24%, 19%);
   --light-grayish-blue: hsl(234, 39%, 85%);
-  --light-grayish-blue--hover: hsl(236, 33%, 92%);
   --dark-grayish-blue: hsl(234, 11%, 52%);
-  --very-dark-grayish-blue: hsl(233, 14%, 35%);
   --very-dark-grayish-blue: hsl(237, 14%, 26%);
 }
 
-body {
-  font-family: "Josefin Sans", sans-serif;
-  font-size: 0.75rem; /* 12px */
+body.light {
+  --color-canvas: var(--very-light-gray);
+  --color-surface: var(--white);
+  --color-text: var(--very-dark-grayish-blue);
+  --color-text-secondary: var(--dark-grayish-blue);
+  --color-border: var(--very-light-grayish-blue);
+  --card-shadow: 0px 35px 50px -15px rgba(194, 195, 214, 0.5);
 }
 
-@media screen (min-width: 48em) {
+body.dark {
+  --color-canvas: var(--very-dark-blue);
+  --color-surface: var(--very-dark-desaturated-blue);
+  --color-text: var(--light-grayish-blue);
+  --color-text-secondary: var(--dark-grayish-blue);
+  --color-border: var(--very-dark-grayish-blue);
+  --card-shadow: 0px 35px 50px -15px rgba(0, 0, 0, 0.5);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  position: relative;
+  background-color: var(--color-canvas);
+  color: var(--color-text);
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 0.75rem; /* 12px */
+  transition: background-color 200ms ease;
+}
+
+body * {
+  transition: background-color 200ms ease, box-shadow 200ms ease,
+    border-color 200ms ease;
+}
+
+body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  inset-block: 0;
+  z-index: -1;
+  display: block;
+  width: 100%;
+  height: 200px;
+  background-image: url("assets/images/bg-mobile-light.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+body.dark::after {
+  background-image: url("assets/images/bg-mobile-dark.jpg");
+}
+
+@media screen and (min-width: 48em) {
   body {
     font-size: 1.125rem; /* 18px */
   }
+  body::after {
+    height: 300px;
+    background-image: url("assets/images/bg-desktop-light.jpg");
+  }
+  body.dark::after {
+    background-image: url("assets/images/bg-desktop-dark.jpg");
+  }
+}
+
+input,
+button {
+  font: inherit;
+  color: inherit;
 }
