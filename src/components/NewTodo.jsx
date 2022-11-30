@@ -35,9 +35,17 @@ const StyledInput = styled.input`
   border: none;
   border-radius: 5px;
   background-color: var(--color-surface);
+  box-shadow: var(--card-shadow);
+
   ::placeholder {
+    opacity: 1;
     color: var(--color-text-secondary);
   }
+
+  &:focus {
+    outline-offset: 0;
+  }
+
   @media screen and (min-width: 48em) {
     padding-left: 72px;
   }

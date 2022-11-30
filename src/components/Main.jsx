@@ -21,7 +21,7 @@ const StyledParagraph = styled.p`
   color: var(--color-text-secondary);
 
   @media screen and (min-width: 48em) {
-    margin-top: 50px;
+    margin-top: 30px;
   }
 `;
 

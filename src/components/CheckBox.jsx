@@ -39,9 +39,14 @@ const StyledCheckBox = styled.input`
   }
 `;
 
-function CheckBox({ checked, onCheck }) {
+function CheckBox(props) {
   return (
-    <StyledCheckBox type="checkbox" checked={checked} onChange={onCheck} />
+    <StyledCheckBox
+      type="checkbox"
+      checked={props.checked}
+      onChange={props.onCheck}
+      {...props}
+    />
   );
 }
 

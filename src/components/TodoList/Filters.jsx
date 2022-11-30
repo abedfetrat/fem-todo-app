@@ -8,6 +8,7 @@ const StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
   column-gap: 20px;
+  z-index: 2;
 
   ${({ standalone }) =>
     standalone &&

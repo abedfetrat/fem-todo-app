@@ -5,6 +5,7 @@ import Button from "./Button";
 import { useTheme } from "../providers/ThemeProvider";
 
 const StyledButton = styled(Button)`
+  line-height: 0;
   .theme-toggle-icon {
     width: 20px;
     height: 20px;

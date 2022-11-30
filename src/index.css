@@ -99,3 +99,9 @@ button {
   font: inherit;
   color: inherit;
 }
+
+input:focus,
+button:focus {
+  outline: 2px dashed #c058f3;
+  outline-offset: 4px;
+}

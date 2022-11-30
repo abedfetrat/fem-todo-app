@@ -11,6 +11,7 @@ const StyledWrapper = styled.div`
   background-color: var(--color-surface);
   border-radius: 5px;
   box-shadow: var(--card-shadow);
+  z-index: 2;
 `;
 
 function TodoList() {
