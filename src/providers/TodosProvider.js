@@ -30,12 +30,12 @@ function todosReducer(todos, action) {
     switch (action.type) {
         case "added": {
             return [
-                ...todos,
                 {
                     id: uuid(),
                     text: action.text,
                     completed: false,
                 },
+                ...todos,
             ];
         }
         case "changed_completion": {
