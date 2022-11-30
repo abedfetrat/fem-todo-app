@@ -16,14 +16,14 @@ const StyledDiv = styled.div`
   }
 `;
 
-function Footer() {
+function Footer({uncompletedCount, onClearCompleted}) {
   const isTablet = useMediaQuery("(min-width: 48em)");
 
   return (
     <StyledDiv>
-      <p>5 items left</p>
+      <p>{uncompletedCount} items left</p>
       {isTablet && <Filters />}
-      <Button>Clear completed</Button>
+      <Button onClick={onClearCompleted}>Clear completed</Button>
     </StyledDiv>
   );
 }

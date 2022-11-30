@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import styled, { css } from "styled-components";
 import Button from "../Button";
+import FilterContext, {filters} from "./FilterContext";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -29,11 +31,28 @@ const StyledFilterBtn = styled(Button)`
 `;
 
 function Filters({ standalone }) {
+  const {selectedFilter, setSelectedFilter} = useContext(FilterContext);
+
   return (
     <StyledDiv standalone={standalone}>
-      <StyledFilterBtn selected>All</StyledFilterBtn>
-      <StyledFilterBtn>Active</StyledFilterBtn>
-      <StyledFilterBtn>Completed</StyledFilterBtn>
+      <StyledFilterBtn
+        selected={selectedFilter === filters.all}
+        onClick={() => setSelectedFilter(filters.all)}
+      >
+        All
+      </StyledFilterBtn>
+      <StyledFilterBtn
+        selected={selectedFilter === filters.active}
+        onClick={() => setSelectedFilter(filters.active)}
+      >
+        Active
+      </StyledFilterBtn>
+      <StyledFilterBtn
+        selected={selectedFilter === filters.completed}
+        onClick={() => setSelectedFilter(filters.completed)}
+      >
+        Completed
+      </StyledFilterBtn>
     </StyledDiv>
   );
 }

@@ -1,4 +1,6 @@
+import { useContext, useState } from "react";
 import styled from "styled-components";
+import { TodosDispatchContext } from "../TodosContext";
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -41,13 +43,31 @@ const StyledInput = styled.input`
   }
 `;
 
-function NewTask() {
+function NewTodo() {
+  const [text, setText] = useState("");
+  const dispatch = useContext(TodosDispatchContext);
+
+  const handleAddTodo = () => {
+    if (text.length > 0) {
+      dispatch({
+        type: "added",
+        text: text
+      });
+      setText("");
+    }
+  };
+
   return (
     <StyledWrapper>
       <StyledRing></StyledRing>
-      <StyledInput placeholder="Create a new todo...." />
+      <StyledInput
+        placeholder="Create a new todo...."
+        value={text}
+        onChange={({ target }) => setText(target.value)}
+        onKeyDown={({ key }) => key === "Enter" && handleAddTodo()}
+      />
     </StyledWrapper>
   );
 }
 
-export default NewTask;
+export default NewTodo;

@@ -39,9 +39,8 @@ const StyledCheckBox = styled.input`
   }
 `;
 
-function CheckBox() {
-  /* TODO: make input controlled */
-  return <StyledCheckBox type="checkbox" />;
+function CheckBox({ checked, onCheck }) {
+  return <StyledCheckBox type="checkbox" checked={checked} onClick={onCheck} readOnly />;
 }
 
 export default CheckBox;
