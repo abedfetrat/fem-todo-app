@@ -1,6 +1,6 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import { TodosDispatchContext } from "../TodosContext";
+import { useTodosDispatch } from "../providers/TodosProvider";
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -45,7 +45,7 @@ const StyledInput = styled.input`
 
 function NewTodo() {
   const [text, setText] = useState("");
-  const dispatch = useContext(TodosDispatchContext);
+  const dispatch = useTodosDispatch();
 
   const handleAddTodo = () => {
     if (text.length > 0) {

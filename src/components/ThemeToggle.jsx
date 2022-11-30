@@ -2,8 +2,7 @@ import styled from "styled-components";
 import { ReactComponent as SunIcon } from "../assets/images/icon-sun.svg";
 import { ReactComponent as MoonIcon } from "../assets/images/icon-moon.svg";
 import Button from "./Button";
-import ThemeContext from "../ThemeContext";
-import { useContext } from "react";
+import { useTheme } from "../providers/ThemeProvider";
 
 const StyledButton = styled(Button)`
   .theme-toggle-icon {
@@ -18,7 +17,7 @@ const StyledButton = styled(Button)`
 `;
 
 function ThemeToggle() {
-  const {theme, toggleTheme} = useContext(ThemeContext);
+  const { theme, toggleTheme } = useTheme();
   return (
     <StyledButton onClick={toggleTheme}>
       {theme === "light" ? (

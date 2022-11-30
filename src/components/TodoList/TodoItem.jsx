@@ -2,8 +2,7 @@ import styled, { css } from "styled-components";
 import CheckBox from "../CheckBox";
 import Button from "../Button";
 import { ReactComponent as CrossIcon } from "../../assets/images/icon-cross.svg";
-import { useContext } from "react";
-import { TodosDispatchContext } from "../../TodosContext";
+import { useTodosDispatch } from "../../providers/TodosProvider";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -33,7 +32,7 @@ const StyledWrapper = styled.div`
 `;
 
 function TodoItem({ id, text, completed }) {
-  const dispatch = useContext(TodosDispatchContext);
+  const dispatch = useTodosDispatch();
   const handleChangeCompletion = () => {
     dispatch({
       type: "changed_completion",

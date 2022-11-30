@@ -40,7 +40,9 @@ const StyledCheckBox = styled.input`
 `;
 
 function CheckBox({ checked, onCheck }) {
-  return <StyledCheckBox type="checkbox" checked={checked} onClick={onCheck} readOnly />;
+  return (
+    <StyledCheckBox type="checkbox" checked={checked} onChange={onCheck} />
+  );
 }
 
 export default CheckBox;

@@ -3,8 +3,8 @@ import TodoItem from "./TodoItem";
 import Footer from "./Footer";
 import Filters from "./Filters";
 import useMediaQuery from "../../hooks/useMediaQuery";
-import { useContext, useState } from "react";
-import { TodosContext, TodosDispatchContext } from "../../TodosContext";
+import { useState } from "react";
+import { useTodos, useTodosDispatch } from "../../providers/TodosProvider";
 import FilterContext, { filters } from "./FilterContext";
 
 const StyledWrapper = styled.div`
@@ -16,8 +16,8 @@ const StyledWrapper = styled.div`
 function TodoList() {
   const isMobile = useMediaQuery("(max-width: 767px)");
 
-  const todos = useContext(TodosContext);
-  const dispatch = useContext(TodosDispatchContext);
+  const todos = useTodos();
+  const dispatch = useTodosDispatch();
 
   const [selectedFilter, setSelectedFilter] = useState(filters.all);
 
