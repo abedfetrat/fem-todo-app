@@ -15,12 +15,21 @@ const StyledApp = styled.div`
 
 function App() {
   const [theme, setTheme] = useLocalStorageState("theme", THEMES.light);
+  const [persistedTodos, setPersistedTodos] = useLocalStorageState(
+    "todos",
+    [],
+    true
+  );
 
-  const [todos, dispatch] = useReducer(todosReducer, []);
+  const [todos, dispatch] = useReducer(todosReducer, persistedTodos);
 
   useEffect(() => {
     document.body.className = theme;
   }, [theme]);
+
+  useEffect(() => {
+    setPersistedTodos(todos);
+  }, [todos]);
 
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
@@ -66,10 +75,10 @@ function todosReducer(todos, action) {
       });
     }
     case "deleted": {
-      return todos.filter(todo => todo.id !== action.id);
+      return todos.filter((todo) => todo.id !== action.id);
     }
     case "cleared_completed": {
-      return todos.filter(todo => !todo.completed);
+      return todos.filter((todo) => !todo.completed);
     }
   }
 }
