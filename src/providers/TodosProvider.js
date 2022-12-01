@@ -8,7 +8,7 @@ const TodosDispatchContext = createContext(null);
 function TodosProvider({ children }) {
     const [persistedTodos, setPersistedTodos] = useLocalStorageState(
         "todos",
-        DATA,
+        [],
         true
     );
     const [todos, dispatch] = useReducer(todosReducer, persistedTodos);
@@ -67,36 +67,3 @@ function useTodosDispatch() {
 }
 
 export { TodosProvider as default, useTodos, useTodosDispatch };
-
-const DATA = [
-    {
-        id: uuid(),
-        text: "Build Frontend Mentor GitHub User Search App",
-        completed: true
-    },
-    {
-        id: uuid(),
-        text: "Build Frontend Mentor Todo App",
-        completed: true
-    },
-    {
-        id: uuid(),
-        text: "Build Frontend Mentor Entertainment App",
-        completed: false
-    },
-    {
-        id: uuid(),
-        text: "Build Frontend Mentor Markdown Editor App",
-        completed: false
-    },
-    {
-        id: uuid(),
-        text: "Build Frontend Mentor Kanaban Tasks App",
-        completed: false
-    },
-    {
-        id: uuid(),
-        text: "Build Frontend Mentor Invoice App",
-        completed: false
-    },
-];
