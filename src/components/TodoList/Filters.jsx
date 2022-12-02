@@ -1,9 +1,10 @@
 import { useContext } from "react";
 import styled, { css } from "styled-components";
 import Button from "../Button";
-import FilterContext, {filters} from "./FilterContext";
+import FilterContext, { filters } from "./FilterContext";
+import { motion } from "framer-motion";
 
-const StyledDiv = styled.div`
+const StyledDiv = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,10 +32,10 @@ const StyledFilterBtn = styled(Button)`
 `;
 
 function Filters({ standalone }) {
-  const {selectedFilter, setSelectedFilter} = useContext(FilterContext);
+  const { selectedFilter, setSelectedFilter } = useContext(FilterContext);
 
   return (
-    <StyledDiv standalone={standalone}>
+    <StyledDiv standalone={standalone} layout>
       <StyledFilterBtn
         selected={selectedFilter === filters.all}
         onClick={() => setSelectedFilter(filters.all)}

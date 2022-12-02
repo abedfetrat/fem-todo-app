@@ -6,12 +6,13 @@ import useMediaQuery from "../../hooks/useMediaQuery";
 import { useState } from "react";
 import { useTodos, useTodosDispatch } from "../../providers/TodosProvider";
 import FilterContext, { filters } from "./FilterContext";
-import { Reorder } from "framer-motion";
+import { motion, Reorder } from "framer-motion";
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled(motion.div)`
   background-color: var(--color-surface);
   border-radius: 5px;
   box-shadow: var(--card-shadow);
+  overflow: hidden;
 
   .todolist-placeholder {
     display: grid;
@@ -60,7 +61,12 @@ function TodoList() {
 
   const renderTodos = () => {
     return (
-      <Reorder.Group axis="y" values={filteredTodos} onReorder={handleReorder}>
+      <Reorder.Group
+        key={selectedFilter}
+        axis="y"
+        values={filteredTodos}
+        onReorder={handleReorder}
+      >
         {filteredTodos.map((todo) => (
           <Reorder.Item key={todo.id} value={todo}>
             <TodoItem todo={todo} />
@@ -72,7 +78,7 @@ function TodoList() {
 
   const renderPlaceholder = () => {
     return (
-      <div className="todolist-placeholder">
+      <motion.div className="todolist-placeholder" layout="position">
         {selectedFilter === filters.completed ? (
           <p>You haven't completed any todos yet</p>
         ) : (
@@ -80,7 +86,7 @@ function TodoList() {
             Sit back and relax 🍹 <br /> You don't have anything todo
           </p>
         )}
-      </div>
+      </motion.div>
     );
   };
 
@@ -91,7 +97,7 @@ function TodoList() {
         setSelectedFilter: setSelectedFilter,
       }}
     >
-      <StyledWrapper>
+      <StyledWrapper layout>
         {filteredTodos.length > 0 ? renderTodos() : renderPlaceholder()}
         <Footer
           uncompletedCount={uncompletedCount}
