@@ -55,6 +55,9 @@ function todosReducer(todos, action) {
         case "cleared_completed": {
             return todos.filter((todo) => !todo.completed);
         }
+        case "reordered": {
+            return action.reorderedTodos;
+        }
     }
 }
 

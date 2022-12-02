@@ -6,12 +6,12 @@ import useMediaQuery from "../../hooks/useMediaQuery";
 import { useState } from "react";
 import { useTodos, useTodosDispatch } from "../../providers/TodosProvider";
 import FilterContext, { filters } from "./FilterContext";
+import { Reorder } from "framer-motion";
 
 const StyledWrapper = styled.div`
   background-color: var(--color-surface);
   border-radius: 5px;
   box-shadow: var(--card-shadow);
-  z-index: 2;
 
   .todolist-placeholder {
     display: grid;
@@ -51,6 +51,39 @@ function TodoList() {
     });
   };
 
+  const handleReorder = (newOrder) => {
+    dispatch({
+      type: "reordered",
+      reorderedTodos: newOrder,
+    });
+  };
+
+  const renderTodos = () => {
+    return (
+      <Reorder.Group axis="y" values={filteredTodos} onReorder={handleReorder}>
+        {filteredTodos.map((todo) => (
+          <Reorder.Item key={todo.id} value={todo}>
+            <TodoItem todo={todo} />
+          </Reorder.Item>
+        ))}
+      </Reorder.Group>
+    );
+  };
+
+  const renderPlaceholder = () => {
+    return (
+      <div className="todolist-placeholder">
+        {selectedFilter === filters.completed ? (
+          <p>You haven't completed any todos yet</p>
+        ) : (
+          <p>
+            Sit back and relax 🍹 <br /> You don't have anything todo
+          </p>
+        )}
+      </div>
+    );
+  };
+
   return (
     <FilterContext.Provider
       value={{
@@ -59,27 +92,7 @@ function TodoList() {
       }}
     >
       <StyledWrapper>
-        {filteredTodos.length > 0 ? (
-          filteredTodos.map((todo) => (
-            <TodoItem
-              key={todo.id}
-              id={todo.id}
-              text={todo.text}
-              completed={todo.completed}
-            />
-          ))
-        ) : (
-          <div className="todolist-placeholder">
-            {selectedFilter === filters.completed ? (
-              <p>You haven't completed any todos yet</p>
-            ) : (
-              <p>
-                Sit back and relax 🍹 <br /> You don't have anything todo
-              </p>
-            )}
-          </div>
-        )}
-
+        {filteredTodos.length > 0 ? renderTodos() : renderPlaceholder()}
         <Footer
           uncompletedCount={uncompletedCount}
           onClearCompleted={handleClearCompleted}

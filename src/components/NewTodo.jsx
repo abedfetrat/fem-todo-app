@@ -5,6 +5,13 @@ import { useTodosDispatch } from "../providers/TodosProvider";
 const StyledWrapper = styled.div`
   position: relative;
   height: 48px;
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    box-shadow: var(--card-shadow);
+  }
   @media screen and (min-width: 48em) {
     height: 64px;
   }
@@ -14,7 +21,6 @@ const StyledRing = styled.div`
   position: absolute;
   top: 50%;
   left: 20px;
-  z-index: 2;
   transform: translateY(-50%);
   width: 20px;
   height: 20px;
@@ -35,7 +41,6 @@ const StyledInput = styled.input`
   border: none;
   border-radius: 5px;
   background-color: var(--color-surface);
-  box-shadow: var(--card-shadow);
 
   ::placeholder {
     opacity: 1;
@@ -59,7 +64,7 @@ function NewTodo() {
     if (text.length > 0) {
       dispatch({
         type: "added",
-        text: text
+        text: text,
       });
       setText("");
     }

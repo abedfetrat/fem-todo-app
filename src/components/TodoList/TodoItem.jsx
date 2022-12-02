@@ -10,6 +10,7 @@ const StyledWrapper = styled.div`
   column-gap: 12px;
   padding: 16px 20px;
   border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-surface);
 
   .todo-item-check {
     flex-shrink: 0;
@@ -52,7 +53,8 @@ const StyledWrapper = styled.div`
   }
 `;
 
-function TodoItem({ id, text, completed }) {
+function TodoItem({ todo }) {
+  const { id, text, completed } = todo;
   const dispatch = useTodosDispatch();
   const handleChangeCompletion = () => {
     dispatch({
