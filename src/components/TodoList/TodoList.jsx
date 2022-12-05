@@ -4,7 +4,10 @@ import Footer from "./Footer";
 import Filters from "./Filters";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import { useState } from "react";
-import { useTodos, useTodosDispatch } from "../../providers/TodosProvider";
+import {
+  useTodos,
+  useTodosDispatch,
+} from "../../providers/TodosProvider";
 import FilterContext, { filters } from "./FilterContext";
 import { motion, Reorder } from "framer-motion";
 
@@ -68,9 +71,7 @@ function TodoList() {
         onReorder={handleReorder}
       >
         {filteredTodos.map((todo) => (
-          <Reorder.Item key={todo.id} value={todo}>
-            <TodoItem todo={todo} />
-          </Reorder.Item>
+          <TodoItem key={todo.id} todo={todo} />
         ))}
       </Reorder.Group>
     );

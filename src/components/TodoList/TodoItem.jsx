@@ -3,6 +3,8 @@ import CheckBox from "../CheckBox";
 import Button from "../Button";
 import { ReactComponent as CrossIcon } from "../../assets/images/icon-cross.svg";
 import { useTodosDispatch } from "../../providers/TodosProvider";
+import { Reorder } from "framer-motion";
+import { useState } from "react";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -56,12 +58,16 @@ const StyledWrapper = styled.div`
 function TodoItem({ todo }) {
   const { id, text, completed } = todo;
   const dispatch = useTodosDispatch();
+  const [draging, setDraging] = useState(false);
+
   const handleChangeCompletion = () => {
-    dispatch({
-      type: "changed_completion",
-      id: id,
-      completed: !completed,
-    });
+    if (!draging) {
+      dispatch({
+        type: "changed_completion",
+        id: id,
+        completed: !completed,
+      });
+    }
   };
 
   const handleDelete = () => {
@@ -72,19 +78,25 @@ function TodoItem({ todo }) {
   };
 
   return (
-    <StyledWrapper completed={completed}>
-      <CheckBox
-        className="todo-item-check"
-        checked={completed}
-        onCheck={handleChangeCompletion}
-      />
-      <p className="todo-item-text" onClick={handleChangeCompletion}>
-        {text}
-      </p>
-      <Button className="todo-item-delete" onClick={handleDelete}>
-        <CrossIcon />
-      </Button>
-    </StyledWrapper>
+    <Reorder.Item
+      value={todo}
+      onDragStart={(_) => setDraging(true)}
+      onDragEnd={(_) => setTimeout(() => setDraging(false), 200)}
+    >
+      <StyledWrapper completed={completed}>
+        <CheckBox
+          className="todo-item-check"
+          checked={completed}
+          onCheck={handleChangeCompletion}
+        />
+        <p className="todo-item-text" onClick={handleChangeCompletion}>
+          {text}
+        </p>
+        <Button className="todo-item-delete" onClick={handleDelete}>
+          <CrossIcon />
+        </Button>
+      </StyledWrapper>
+    </Reorder.Item>
   );
 }
 
