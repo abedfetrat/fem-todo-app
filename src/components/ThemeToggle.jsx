@@ -20,7 +20,7 @@ const StyledButton = styled(Button)`
 function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
   return (
-    <StyledButton onClick={toggleTheme}>
+    <StyledButton onClick={toggleTheme} aria-label="toggle app theme">
       {theme === "light" ? (
         <MoonIcon className="theme-toggle-icon" />
       ) : (
