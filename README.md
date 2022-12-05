@@ -35,8 +35,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [https://www.frontendmentor.io/solutions/todo-app-built-with-react-styled-components-framer-motion-MFPh8DwOGR](https://www.frontendmentor.io/solutions/todo-app-built-with-react-styled-components-framer-motion-MFPh8DwOGR)
+- Live Site URL: [https://abedfetrat.github.io/fm-todo-app/](https://abedfetrat.github.io/fm-todo-app/)
 
 ## My process
 
