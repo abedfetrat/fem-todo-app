@@ -2,12 +2,14 @@ import { useEffect, useReducer, createContext, useContext } from "react";
 import useLocalStorageState from "../hooks/useLocalStorageState";
 import { v4 as uuid } from "@lukeed/uuid";
 
+const STORAGE_KEY = "todos";
+
 const TodosContext = createContext(null);
 const TodosDispatchContext = createContext(null);
 
 function TodosProvider({ children }) {
     const [persistedTodos, setPersistedTodos] = useLocalStorageState(
-        "todos",
+        STORAGE_KEY,
         [],
         true
     );
@@ -69,4 +71,4 @@ function useTodosDispatch() {
     return useContext(TodosDispatchContext);
 }
 
-export { TodosProvider as default, useTodos, useTodosDispatch };
+export { TodosProvider as default, useTodos, useTodosDispatch, STORAGE_KEY };
