@@ -3,13 +3,18 @@ import TodoItem from "./TodoItem";
 import Footer from "./Footer";
 import Filters from "./Filters";
 import useMediaQuery from "../../hooks/useMediaQuery";
-import { useState } from "react";
-import {
-  useTodos,
-  useTodosDispatch,
-} from "../../providers/TodosProvider";
-import FilterContext, { filters } from "./FilterContext";
 import { motion, Reorder } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  clearedCompleted,
+  reordered,
+  selectAllTodos,
+  selectFilteredTodos,
+} from "../../todosSlice";
+import {
+  selectSelectedFilter,
+  selectSelectableFilters,
+} from "../../filtersSlice";
 
 const StyledWrapper = styled(motion.div)`
   background-color: var(--color-surface);
@@ -30,36 +35,19 @@ const StyledWrapper = styled(motion.div)`
 
 function TodoList() {
   const isMobile = useMediaQuery("(max-width: 767px)");
-
-  const todos = useTodos();
-  const dispatch = useTodosDispatch();
-
-  const [selectedFilter, setSelectedFilter] = useState(filters.all);
-
+  const dispatch = useDispatch();
+  const todos = useSelector(selectAllTodos);
+  const filteredTodos = useSelector(selectFilteredTodos);
   const uncompletedCount = todos.filter((todo) => !todo.completed).length;
-
-  const filteredTodos = todos.filter((todo) => {
-    switch (selectedFilter) {
-      case filters.active:
-        return !todo.completed;
-      case filters.completed:
-        return todo.completed;
-      default:
-        return todo;
-    }
-  });
+  const selectableFilters = useSelector(selectSelectableFilters);
+  const selectedFilter = useSelector(selectSelectedFilter);
 
   const handleClearCompleted = () => {
-    dispatch({
-      type: "cleared_completed",
-    });
+    dispatch(clearedCompleted());
   };
 
   const handleReorder = (newOrder) => {
-    dispatch({
-      type: "reordered",
-      reorderedTodos: newOrder,
-    });
+    dispatch(reordered({ newOrder }));
   };
 
   const renderTodos = () => {
@@ -80,7 +68,7 @@ function TodoList() {
   const renderPlaceholder = () => {
     return (
       <motion.div className="todolist-placeholder" layout="position">
-        {selectedFilter === filters.completed ? (
+        {selectedFilter === selectableFilters.completed ? (
           <p>You haven't completed any todos yet</p>
         ) : (
           <p>
@@ -92,12 +80,7 @@ function TodoList() {
   };
 
   return (
-    <FilterContext.Provider
-      value={{
-        selectedFilter: selectedFilter,
-        setSelectedFilter: setSelectedFilter,
-      }}
-    >
+    <>
       <StyledWrapper layout>
         {filteredTodos.length > 0 ? renderTodos() : renderPlaceholder()}
         <Footer
@@ -106,7 +89,7 @@ function TodoList() {
         />
       </StyledWrapper>
       {isMobile && <Filters standalone />}
-    </FilterContext.Provider>
+    </>
   );
 }
 

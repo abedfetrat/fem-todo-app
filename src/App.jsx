@@ -13,14 +13,12 @@ const StyledApp = styled.div`
 function App() {
   return (
     <ThemeProvider>
-      <TodosProvider>
         <StyledApp>
           <Container>
             <Header />
             <Main />
           </Container>
         </StyledApp>
-      </TodosProvider>
     </ThemeProvider>
   );
 }

@@ -1,8 +1,13 @@
 import { useContext } from "react";
 import styled, { css } from "styled-components";
 import Button from "../Button";
-import FilterContext, { filters } from "./FilterContext";
 import { motion } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selected,
+  selectSelectableFilters,
+  selectSelectedFilter,
+} from "../../filtersSlice";
 
 const StyledDiv = styled(motion.div)`
   display: flex;
@@ -23,6 +28,7 @@ const StyledDiv = styled(motion.div)`
 const StyledFilterBtn = styled(Button)`
   font-size: 0.875rem;
   font-weight: 700;
+  text-transform: capitalize;
 
   ${({ selected }) =>
     selected &&
@@ -32,28 +38,21 @@ const StyledFilterBtn = styled(Button)`
 `;
 
 function Filters({ standalone }) {
-  const { selectedFilter, setSelectedFilter } = useContext(FilterContext);
+  const dispatch = useDispatch();
+  const selectableFilters = useSelector(selectSelectableFilters);
+  const selectedFilter = useSelector(selectSelectedFilter);
 
   return (
     <StyledDiv standalone={standalone} layout>
-      <StyledFilterBtn
-        selected={selectedFilter === filters.all}
-        onClick={() => setSelectedFilter(filters.all)}
-      >
-        All
-      </StyledFilterBtn>
-      <StyledFilterBtn
-        selected={selectedFilter === filters.active}
-        onClick={() => setSelectedFilter(filters.active)}
-      >
-        Active
-      </StyledFilterBtn>
-      <StyledFilterBtn
-        selected={selectedFilter === filters.completed}
-        onClick={() => setSelectedFilter(filters.completed)}
-      >
-        Completed
-      </StyledFilterBtn>
+      {Object.entries(selectableFilters).map(([key, value]) => (
+        <StyledFilterBtn
+          key={key}
+          selected={selectedFilter === value}
+          onClick={() => dispatch(selected({ newSelection: value }))}
+        >
+          {value}
+        </StyledFilterBtn>
+      ))}
     </StyledDiv>
   );
 }

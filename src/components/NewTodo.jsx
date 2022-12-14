@@ -1,12 +1,13 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { useTodosDispatch } from "../providers/TodosProvider";
+import { added } from "../todosSlice";
 
 const StyledWrapper = styled.div`
   position: relative;
   height: 48px;
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
     z-index: -1;
@@ -58,14 +59,11 @@ const StyledInput = styled.input`
 
 function NewTodo() {
   const [text, setText] = useState("");
-  const dispatch = useTodosDispatch();
+  const dispatch = useDispatch();
 
   const handleAddTodo = () => {
     if (text.length > 0) {
-      dispatch({
-        type: "added",
-        text: text,
-      });
+      dispatch(added({ text }));
       setText("");
     }
   };

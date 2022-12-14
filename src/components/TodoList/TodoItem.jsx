@@ -2,9 +2,10 @@ import styled, { css } from "styled-components";
 import CheckBox from "../CheckBox";
 import Button from "../Button";
 import { ReactComponent as CrossIcon } from "../../assets/images/icon-cross.svg";
-import { useTodosDispatch } from "../../providers/TodosProvider";
 import { Reorder } from "framer-motion";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { deleted, toggled } from "../../todosSlice";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -57,24 +58,17 @@ const StyledWrapper = styled.div`
 
 function TodoItem({ todo }) {
   const { id, text, completed } = todo;
-  const dispatch = useTodosDispatch();
+  const dispatch = useDispatch();
   const [draging, setDraging] = useState(false);
 
   const handleChangeCompletion = () => {
     if (!draging) {
-      dispatch({
-        type: "changed_completion",
-        id: id,
-        completed: !completed,
-      });
+      dispatch(toggled({ id }));
     }
   };
 
   const handleDelete = () => {
-    dispatch({
-      type: "deleted",
-      id: id,
-    });
+    dispatch(deleted({ id }));
   };
 
   return (
