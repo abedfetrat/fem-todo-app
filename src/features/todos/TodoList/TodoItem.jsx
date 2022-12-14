@@ -1,11 +1,11 @@
 import styled, { css } from "styled-components";
-import CheckBox from "../CheckBox";
-import Button from "../Button";
-import { ReactComponent as CrossIcon } from "../../assets/images/icon-cross.svg";
+import CheckBox from "../../../components/CheckBox";
+import Button from "../../../components/Button";
+import { ReactComponent as CrossIcon } from "../../../assets/images/icon-cross.svg";
 import { Reorder } from "framer-motion";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { deleted, toggled } from "../../todosSlice";
+import { deleted, toggled } from "../todosSlice";
 
 const StyledWrapper = styled.div`
   display: flex;

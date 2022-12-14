@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import filtersReducer from "./filtersSlice";
-import todosReducer from "./todosSlice";
+import filtersReducer from "../features/filters/filtersSlice";
+import todosReducer from "../features/todos/todosSlice";
 
 const loadStateFromStorage = () => {
     const persistedState = JSON.parse(localStorage.getItem('app_state'));

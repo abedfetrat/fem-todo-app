@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import Filters from "./Filters";
-import Button from "../Button";
-import useMediaQuery from "../../hooks/useMediaQuery";
+import Filters from "../../filters/Filters";
+import Button from "../../../components/Button";
+import useMediaQuery from "../../../hooks/useMediaQuery";
 import { motion } from "framer-motion";
 
 const StyledDiv = styled(motion.div)`

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import TodoItem from "./TodoItem";
 import Footer from "./Footer";
-import Filters from "./Filters";
-import useMediaQuery from "../../hooks/useMediaQuery";
+import Filters from "../../filters/Filters";
+import useMediaQuery from "../../../hooks/useMediaQuery";
 import { motion, Reorder } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,11 +10,11 @@ import {
   reordered,
   selectAllTodos,
   selectFilteredTodos,
-} from "../../todosSlice";
+} from "../todosSlice";
 import {
   selectSelectedFilter,
   selectSelectableFilters,
-} from "../../filtersSlice";
+} from "../../filters/filtersSlice";
 
 const StyledWrapper = styled(motion.div)`
   background-color: var(--color-surface);

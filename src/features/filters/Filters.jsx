@@ -1,13 +1,12 @@
-import { useContext } from "react";
 import styled, { css } from "styled-components";
-import Button from "../Button";
+import Button from "../../components/Button";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selected,
   selectSelectableFilters,
   selectSelectedFilter,
-} from "../../filtersSlice";
+} from "./filtersSlice";
 
 const StyledDiv = styled(motion.div)`
   display: flex;

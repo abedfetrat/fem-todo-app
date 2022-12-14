@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { added } from "../todosSlice";
+import { added } from "./todosSlice";
 
 const StyledWrapper = styled.div`
   position: relative;

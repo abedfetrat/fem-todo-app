@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import NewTodo from "./NewTodo";
-import TodoList from "./TodoList/TodoList";
+import NewTodo from "../features/todos/NewTodo";
+import TodoList from "../features/todos/TodoList/TodoList";
 
 const StyledMain = styled.main`
   display: flex;

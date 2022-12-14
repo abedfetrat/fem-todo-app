@@ -1,9 +1,8 @@
 import styled from "styled-components";
-import Container from "./components/Container";
-import Header from "./components/Header";
-import Main from "./components/Main";
-import TodosProvider from "./providers/TodosProvider";
-import ThemeProvider from "./providers/ThemeProvider";
+import Container from "../components/Container";
+import Header from "../components/Header";
+import Main from "../components/Main";
+import ThemeProvider from "../providers/ThemeProvider";
 
 const StyledApp = styled.div`
   width: 100vw;
